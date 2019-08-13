@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<meta charset="UTF-8">
+	<title>Counters</title>
+</head>
+<body>
+<div class="card">
+	<div class="header">
+		<h1>Counters</h1>
+	</div>
+	<div id="counters"></div>
+</div>
+<script>
+	window.onload = () => {
+		const eventSource = new EventSource('/stats');
+		eventSource.onmessage = event => {
+			let counters = document.getElementById('counters');
+			counters.innerHTML = "";
+			for (let [key, value] of Object.entries(JSON.parse(event.data))) {
+				counters.insertAdjacentHTML(
+						"beforeend",
+						`<div class="counter">
+						  <span class="key">${key}</span>
+						  <span class="value">${value}</span>
+						  <span class="unit">el/s</span>
+						</div>`
+				)
+			}
+		};
+	};
+</script>
+</body>
+</html>
