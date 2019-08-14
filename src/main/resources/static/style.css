@@ -10,7 +10,7 @@ body {
 
 .card {
   float: left;
-  width: 330px;
+  width: 25rem;
   border: 1px solid lightgray;
   border-radius: 3px;
   background: white;
@@ -41,14 +41,17 @@ body {
 }
 .counter {
   margin: 0.8rem 0 0.8rem;
+  height: 1.5rem;
 }
 
 .counter .key {
-  width: 150px;
+  width: 13rem;
+  float: left;
 }
 
 .counter .value {
+  float: right;
   font-weight: bold;
   text-align: right;
-  width: 100px;
+  width: 10rem;
 }

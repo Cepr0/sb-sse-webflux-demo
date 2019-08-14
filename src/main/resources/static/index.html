@@ -12,10 +12,12 @@
 	</div>
 	<div id="counters"></div>
 </div>
-<script src="EventSource.js"></script>
+<script src="sse.js"></script>
+<script src="eventsource.js"></script>
 <script>
 	window.onload = () => {
-		const eventSource = new EventSource('/stats');
+		// const eventSource = new EventSource('/stats');
+		const eventSource = new EventSourcePolyfill('/stats');
 		eventSource.onmessage = event => {
 			let counters = document.getElementById('counters');
 			counters.innerHTML = "";
@@ -24,8 +26,7 @@
 						"beforeend",
 						`<div class="counter">
 						  <span class="key">${key}</span>
-						  <span class="value">${value}</span>
-						  <span class="unit">el/s</span>
+						  <span class="value">${value} elements</span>
 						</div>`
 				)
 			}
