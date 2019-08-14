@@ -3,15 +3,25 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<meta charset="UTF-8">
-	<title>Counters</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<title>SSE demo</title>
 </head>
 <body>
-<div class="card">
-	<div class="header">
-		<h1>Counters</h1>
+
+<div class="container-fluid">
+	<div class="row justify-content-start m-3">
+		<div class="col-auto" style="width: 25rem;">
+			<div class="card">
+				<h4 class="card-header text-uppercase">Counters</h4>
+				<ul id="counters" class="list-group list-group-flush">
+				</ul>
+			</div>
+		</div>
 	</div>
-	<div id="counters"></div>
 </div>
+
 <script src="sse.js"></script>
 <script src="eventsource.js"></script>
 <script>
@@ -24,10 +34,13 @@
 			for (let [key, value] of Object.entries(JSON.parse(event.data))) {
 				counters.insertAdjacentHTML(
 						"beforeend",
-						`<div class="counter">
-						  <span class="key">${key}</span>
-						  <span class="value">${value} elements</span>
-						</div>`
+						`<li class="list-group-item text-truncate">
+						  <div class="row">
+							 <div class="col-6 text-truncate">${key}</div>
+							 <div class="col-3 text-truncate text-monospace text-right px-1"><strong>${value}</strong></div>
+							 <div class="col-3 text-truncate px-1">elements</div>
+						  </div>
+						</li>`
 				)
 			}
 		};
