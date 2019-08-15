@@ -5,14 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<title>SSE demo</title>
+	<title>SSE with Spring WebFlux example</title>
 </head>
 <body>
 
 <div class="container-fluid">
-
 	<div class="row justify-content-start m-4">
-		<!--	Counters -->
+
+		<!-- Counters -->
 		<div class="col-auto m-3" style="width: 25rem;">
 			<div class="card" style="min-height: 10rem;">
 				<h4 class="card-header">Flux</h4>
@@ -43,8 +43,8 @@
 				</form>
 			</div>
 		</div>
-	</div>
 
+	</div>
 </div>
 
 <script src="sse.js"></script>
@@ -71,7 +71,7 @@
 		};
 	};
 
-	$('#form').submit( e => {
+	$('#form').submit(e => {
 		e.preventDefault();
 
 		$('#result-num').hide().empty();

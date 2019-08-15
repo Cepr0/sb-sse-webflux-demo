@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +28,6 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
-@EnableAsync
 @Slf4j
 @RestController
 @SpringBootApplication
@@ -83,17 +81,16 @@ public class Application {
 						.data(error)
 						.build())
 				)
-				.orElseGet(() -> operation(response)
+				.orElseGet(() -> longOperation(response)
 						.doOnNext(result -> log.info("[i] Operation result: {}", result))
 						.map(result -> ServerSentEvent.<Object>builder(result).build())
 				);
 	}
 
-	private Mono<ProcessResponse> operation(ProcessResponse r) {
+	private Mono<ProcessResponse> longOperation(ProcessResponse r) {
 		r.setNum(r.getNum() * 2);
 		r.setText(r.getText().toUpperCase());
-		return Mono.just(r)
-				.delayElement(Duration.ofSeconds(DELAY));
+		return Mono.just(r).delayElement(Duration.ofSeconds(DELAY));
 	}
 
 	private Optional<String> validate(ProcessRequest request, ProcessResponse response) {
