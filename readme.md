@@ -1,3 +1,3 @@
-# Server Sent Events and Spring WebFlux example
+# Server Sent Events with Spring WebFlux example
 
 ![demo](demo.gif)
