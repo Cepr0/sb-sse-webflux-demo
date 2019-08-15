@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2016 Maxime Petazzoni <maxime.petazzoni@bulix.org>.
+ * https://github.com/mpetazzoni/sse.js
  * All rights reserved.
  */
 

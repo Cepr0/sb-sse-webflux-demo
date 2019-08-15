@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -57,7 +56,7 @@
 		// let eventSource = new EventSourcePolyfill('/stats');
 		eventSource.onmessage = event => {
 			let counters = $('#counters');
-			counters.html('');
+			counters.empty();
 			for (let [key, value] of Object.entries(JSON.parse(event.data))) {
 				counters.append(
 						`<li class="list-group-item text-truncate">
@@ -75,15 +74,14 @@
 	$('#form').submit( e => {
 		e.preventDefault();
 
-		$('#result-num').hide().text('');
-		$('#result-text').hide().text('');
-		$('#result-error').hide().text('');
+		$('#result-num').hide().empty();
+		$('#result-text').hide().empty();
+		$('#result-error').hide().empty();
 
 		$('#processBtn')
 				.prop('disabled', true)
 				.text(" Processing...")
-				.prepend('<span id="spinner" class="spinner-border spinner-border-sm"></span>')
-		;
+				.prepend('<span id="spinner" class="spinner-border spinner-border-sm"></span>');
 
 		let data = {};
 		$.each($('#form').serializeArray(), (i, v) => {
@@ -108,9 +106,8 @@
 		};
 
 		sse.onerror = event => {
-			let errorMessage = event.data;
+			$('#result-error').show().html(event.data);
 			sse.close();
-			$('#result-error').show().html(errorMessage);
 			restoreBtn();
 		};
 
